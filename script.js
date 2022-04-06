@@ -19,7 +19,81 @@ console.log(
 Höjd på canvas: ${canvas.height}`
 );
 
+function paintSquare() {
+  // Blå kvadrat
+  const s = 60; // Kvadratens sidlängd
+  c.fillStyle = "brown";
+  c.fillRect(midX - 30 , midY + 125, s, 7*s);
+
+  // Textinställningar
+  c.font = "48px Arial";
+  c.fillStyle = "Yellow";
+  c.textAlign = "center";
+  //c.fillText("Canvas Rect", midX, midY);
+}
+function paintEllipse() {
+// Draw the ellipse
+c.beginPath();
+c.ellipse(midX, midY, 50, 150, 0, 2.09 , 1);
+c.stroke();
+c.fillStyle = "green"
+c.fillEllipse(midX, midY, 50, 150, 0, 2.09 , 1)
+}
+
+function paintCircle() {
+  // Gul cirkel
+  const r = 150; // Cirkelns radie
+  c.fillStyle = "yellow";
+  c.beginPath();
+  // c.arc(x, y, radie, startvinkel, slutvinkel)
+  c.arc(midX, midY, r, 0, 2 * Math.PI); // En cirkel är en "arc" som går mellan 0 och 2pi
+  c.closePath();
+  c.fill();
+}
+
+function paintRing() {
+  // Funktionen ritar en ring som består av 12 jämnt fördelade prickar
+  const circleRadius = 200;
+  const dotRadius = 15;
+  c.fillStyle = "red";
+  let x; // Kommer att lagra respektive pricks läge i x-led
+  let y; // Kommer att lagra respektive pricks läge i y-led
+  for (let i = 1; i <= 12; i++) {
+    // Beräknar läget på resp. prick
+    x = midX + circleRadius * Math.cos((((Math.PI * 360) / 12) * i) / 180);
+    y = midY + circleRadius * Math.sin((((Math.PI * 360) / 12) * i) / 180);
+
+    // Ritar prickarna
+    c.beginPath();
+    c.arc(x, y, dotRadius, 0, 2 * Math.PI);
+    c.closePath();
+    c.fill();
+  }
+}
+
+function paintSimpleSquarePattern() {
+  const s = 40; // Kvadratens sida
+  const space = 3 * s;
+  const numRows = 6;
+  const numCols = 10;
+  let color = ["blue", "red"];
+  for (let i = 0; i <= numCols; i++) {
+    for (let j = 0; j <= numRows; j++) {
+      c.fillStyle = color[(i + 1) % 2];
+      if (j % 2 === 1) {
+        c.fillStyle = color[i % 2];
+      }
+      c.fillRect(i * space, j * space, s, s);
+    }
+  }
+}
+
+paintSquare();
+//paintCircle();
+//paintSimpleSquarePattern();
+//paintRing();
 function drawPicture() {
   // Här skriver du funktionen som ritar bilden
 }
 drawPicture();
+paintEllipse();
